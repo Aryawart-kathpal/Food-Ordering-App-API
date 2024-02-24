@@ -10,7 +10,7 @@ const sendVerificationEmail= async ({name,email,verificationToken,origin})=>{
         subject:'Verification email',
         html:`<h4> Hello ${name} </h4> <br>
                 ${message}`
-    })
+    });
 }
 
 module.exports=sendVerificationEmail;

@@ -1,8 +1,7 @@
 module.exports={
-    host: 'smtp.ethereal.email',
-    port: 587,
+    service:'Gmail',
     auth: {
-        user: 'shanny.breitenberg52@ethereal.email',
-        pass: 'xx2skHwAwY52V6A6xW'
+        user: 'aryanirwan069@gmail.com',
+        pass: 'taaoxbgedljqzhsz'
     }
 };

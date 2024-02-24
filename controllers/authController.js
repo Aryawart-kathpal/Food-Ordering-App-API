@@ -23,7 +23,7 @@ const register= async(req,res)=>{
     const origin='http://localhost:5000';
 
     await sendVerificationEmail({email:user.email,
-    name:user.email,verificationToken:user.verificationToken,origin});
+    name:user.name,verificationToken:user.verificationToken,origin});
 
     return res.status(StatusCodes.CREATED).json({msg:'Success!! please verify your email account'});
 }
@@ -123,7 +123,7 @@ const forgotPassword= async(req,res)=>{
         const passwordToken = crypto.randomBytes(70).toString('hex');
         const origin = 'http://localhost:5000';
         await sendResetPasswordEmail({name:user.name,email:user.email,token:passwordToken,origin});
-
+        
         const tenMinutes= 10*60*1000;
         const passwordTokenExpirationDate = new Date(Date.now()+tenMinutes);
         
@@ -131,11 +131,11 @@ const forgotPassword= async(req,res)=>{
         user.passwordTokenExpirationDate=passwordTokenExpirationDate;
         await user.save();
     }
-    res.status(OK).json({msg:"Please check email for verification link"});
+    res.status(StatusCodes.OK).json({msg:"Please check email for verification link"});
 }
 
 const resetPassword = async(req,res)=>{
-    const {email,token} = req.params;
+    const {email,token} = req.query;
     const {password}=req.body;
 
     if(!email || !token || !password){

@@ -59,24 +59,13 @@ const userSchema = mongoose.Schema({
 
 userSchema.pre('save',async function(){
     if(!this.isModified('password')) return;
-    console.log(this.password);
+    
     const salt=await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password,salt);
 })
 
-// userSchema.methods.comparePassword = async function(candidatePassword){
-//     console.log(this.password);
-//     console.log(candidatePassword);
-//     const isMatch = await bcrypt.compare(candidatePassword,this.password);
-//     console.log(isMatch);
-//     return isMatch;
-// }
-
 userSchema.methods.comparePassword = async function (candidatePassword) {
-    // console.log(candidatePassword);
-    // console.log(this.password);
-    const isMatch = await bcrypt.compare(candidatePassword, this.password);
-    // console.log(isMatch);
+    const isMatch = await bcrypt.compare(candidatePassword, this.password);// this order matters
     return isMatch;
 };
 

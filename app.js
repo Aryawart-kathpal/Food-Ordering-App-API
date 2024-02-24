@@ -11,7 +11,8 @@ const errorHandlerMiddleware = require('./middleware/error-handler');
 const notFoundMiddleware = require('./middleware/not-found');
 
 // Routes
-const userRoutes= require('./routes/userRoutes');
+const authRoutes= require('./routes/authRoutes');
+const userRoutes=require('./routes/userRoutes');
 
 // all other requirements
 const cookieParser = require('cookie-parser');
@@ -25,8 +26,8 @@ app.get('/',(req,res)=>{
     res.send("Food-delivery-API");
 })
 
-app.use('/api/auth',userRoutes);
-
+app.use('/api/auth',authRoutes);
+app.use('/api/user',userRoutes);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
